@@ -20,9 +20,14 @@ interface grid {
     body: Content[];
 }
 
+interface img {
+    type: "img";
+    body: { src: string, caption: string };
+}
+
 interface video {
     type: "video";
     body: { src: string, caption: string };
 }
 
-export type Content = h1 | chart | grid | video | p;
+export type Content = h1 | p | chart | grid | img | video ;

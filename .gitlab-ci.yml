@@ -1,0 +1,47 @@
+default:
+  image: python:3.10
+  tags:
+    - dms-large
+
+publish:
+  rules:
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+
+  cache:
+    paths:
+      - .cache
+
+  script:
+    # Setup
+    - git config user.email $GITLAB_USER_EMAIL
+    - git config user.name $GITLAB_USER_NAME
+    - git remote remove origin
+    - git remote add origin https://oauth2:${GITLAB_TOKEN}@${CI_PROJECT_URL#https://}.git
+
+    # install
+    - export PATH="${PATH}:/root/.local/bin"
+    - pip install --root-user-action=ignore poetry
+    - poetry config installer.max-workers 10
+    - poetry config cache-dir ./.cache/poetry
+    - poetry config http-basic.dms $DMS_USER $DMS_PASS
+    - poetry install
+
+    # Code check and format
+    - poetry run ruff check dms_report/
+    - poetry run ruff format dms_report/
+    - poetry run pyright dms_report/
+    - poetry run isort dms_report/
+
+    # Test
+    - poetry run pytest
+
+    # Version and push to main
+    - poetry version patch
+    - version=$(poetry version -s)
+    - printf "# DO NOT EDIT\n__version__ = '$version'" > dms_report/__init__.py
+    - git commit -am $version
+    - git tag $version
+    - git push origin HEAD:$CI_DEFAULT_BRANCH $version -o ci.skip
+
+    # Publish
+    - poetry publish --build -r jfrog --username $JFROG_USER --password $JFROG_PASS

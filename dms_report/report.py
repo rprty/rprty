@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Literal
 
 from pydantic import BaseModel
 
@@ -19,24 +20,49 @@ class grid(BaseModel):
     body: list["Section"]
 
 
-class video_body(BaseModel):
+class media(BaseModel):
     src: str
     caption: str = ''
 
 
+class img(BaseModel):
+    type: str = "img"
+    body: media
+
+
 class video(BaseModel):
     type: str = "video"
-    body: video_body
+    body: media
 
 
-Section = h1 | p | grid | video
+class dataset(BaseModel):
+    label: str
+    data: list[int]
+
+
+class chart_data(BaseModel):
+    labels: list[str]
+    datasets: list[dataset]
+
+
+class chart_body(BaseModel):
+    type: Literal["line", "bar"]
+    data: chart_data
+
+
+class chart(BaseModel):
+    type: str = "chart"
+    body: chart_body
+
+
+Section = h1 | p | grid | img | video | chart
 
 
 class Report:
     def __init__(self, sections: list[Section]):
         self.sections = sections
 
-    def write(self, file: str):
+    def write(self, file="public/report.json"):
         os.makedirs(os.path.dirname(file), exist_ok=True)
         with open(file, "w") as f:
             report = [
@@ -46,22 +72,3 @@ class Report:
             json.dump(report, f)
 
 
-if __name__ == "__main__":
-    report = Report([
-        h1(body="Hello, World!"),
-        p(body="This is a paragraph"),
-        grid(body=[
-            video(body=video_body(
-                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
-            video(body=video_body(
-                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
-            video(body=video_body(
-                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
-            video(body=video_body(
-                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
-        ]),
-    ])
-
-    report.write("public/report.json")
-    report.write("public/report.json")
-    report.write("public/report.json")

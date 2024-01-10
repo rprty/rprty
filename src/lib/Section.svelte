@@ -23,6 +23,13 @@
         </div>
     {/if}
 
+    {#if section.type === "img"}
+        <div class="col">
+            <img src={section.body.src} alt="" />
+            <b>{section.body.caption}</b>
+        </div>
+    {/if}
+
     {#if section.type === "video"}
         <div class="col">
             <video src={section.body.src} controls>

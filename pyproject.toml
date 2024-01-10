@@ -4,6 +4,10 @@ version = "0.0.0"
 description = ""
 authors = ["Gilad Kutiel <giladk@mobileye.com>"]
 readme = "README.md"
+packages = [
+    { include = "dms_report"},
+    { include = "dist"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.10"
