@@ -21,6 +21,7 @@ class grid(BaseModel):
 
 class video_body(BaseModel):
     src: str
+    caption: str = ''
 
 
 class video(BaseModel):

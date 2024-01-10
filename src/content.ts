@@ -22,7 +22,7 @@ interface grid {
 
 interface video {
     type: "video";
-    body: { src: string };
+    body: { src: string, caption: string };
 }
 
 export type Content = h1 | chart | grid | video | p;

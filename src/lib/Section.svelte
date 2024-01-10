@@ -24,8 +24,11 @@
     {/if}
 
     {#if section.type === "video"}
-        <video src={section.body.src} controls>
-            <track kind="captions" />
-        </video>
+        <div class="col">
+            <video src={section.body.src} controls>
+                <track kind="captions" />
+            </video>
+            <b>{section.body.caption}</b>
+        </div>
     {/if}
 {/each}
