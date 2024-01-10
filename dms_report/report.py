@@ -1,27 +1,25 @@
 import json
 import os
-from typing import Any
 
 from pydantic import BaseModel
 
 
-class Section(BaseModel):
-    body: Any
-
-
-class h1(Section):
+class h1(BaseModel):
     type: str = "h1"
     body: str
 
 
-class p(Section):
+class p(BaseModel):
     type: str = "p"
     body: str
 
 
-class grid(Section):
+class grid(BaseModel):
     type: str = "grid"
-    body: list[Section]
+    body: list["Section"]
+
+
+Section = h1 | p | grid
 
 
 class Report:

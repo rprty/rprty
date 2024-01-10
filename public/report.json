@@ -1,1 +1,49 @@
-[{"body": "Hello, World!", "type": "h1"}, {"body": "This is a paragraph", "type": "p"}, {"body": [{"body": "Hello, World!"}, {"body": "This is a paragraph"}, {"body": [{"body": "Hello, World!", "type": "h1"}, {"body": "This is a paragraph", "type": "p"}]}, {"body": [{"body": "Hello, World!", "type": "h1"}, {"body": "This is a paragraph", "type": "p"}]}], "type": "grid"}]
+[
+    {
+        "type": "h1",
+        "body": "Hello, World!"
+    },
+    {
+        "type": "p",
+        "body": "This is a paragraph"
+    },
+    {
+        "type": "grid",
+        "body": [
+            {
+                "type": "h1",
+                "body": "Hello, World!"
+            },
+            {
+                "type": "p",
+                "body": "This is a paragraph"
+            },
+            {
+                "type": "grid",
+                "body": [
+                    {
+                        "type": "h1",
+                        "body": "Hello, World!"
+                    },
+                    {
+                        "type": "p",
+                        "body": "This is a paragraph"
+                    }
+                ]
+            },
+            {
+                "type": "grid",
+                "body": [
+                    {
+                        "type": "h1",
+                        "body": "Hello, World!"
+                    },
+                    {
+                        "type": "p",
+                        "body": "This is a paragraph"
+                    }
+                ]
+            }
+        ]
+    }
+]

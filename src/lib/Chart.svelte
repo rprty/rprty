@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { Chart, type ChartConfiguration } from "chart.js";
+    import { Chart, type ChartConfiguration } from "chart.js/auto";
 
     export let content: ChartConfiguration = {
         type: "bar",
