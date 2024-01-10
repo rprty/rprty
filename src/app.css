@@ -1,0 +1,26 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+main {
+  width: 800px;
+  margin: 2em auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  margin: 1rem;
+}
+
+.grid > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
