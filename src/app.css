@@ -1,3 +1,11 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+* {
+  box-sizing: border-box;
+
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -5,11 +13,13 @@ html, body {
 }
 
 main {
-  width: 800px;
+  width: 1600px;
   margin: 2em auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 1px solid red;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .grid {

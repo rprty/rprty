@@ -24,7 +24,7 @@
     {/if}
 
     {#if section.type === "video"}
-        <video src={section.body.src}>
+        <video src={section.body.src} controls>
             <track kind="captions" />
         </video>
     {/if}

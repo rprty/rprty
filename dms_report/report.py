@@ -19,7 +19,16 @@ class grid(BaseModel):
     body: list["Section"]
 
 
-Section = h1 | p | grid
+class video_body(BaseModel):
+    src: str
+
+
+class video(BaseModel):
+    type: str = "video"
+    body: video_body
+
+
+Section = h1 | p | grid | video
 
 
 class Report:
@@ -41,17 +50,17 @@ if __name__ == "__main__":
         h1(body="Hello, World!"),
         p(body="This is a paragraph"),
         grid(body=[
-            h1(body="Hello, World!"),
-            p(body="This is a paragraph"),
-            grid(body=[
-                h1(body="Hello, World!"),
-                p(body="This is a paragraph"),
-            ]),
-            grid(body=[
-                h1(body="Hello, World!"),
-                p(body="This is a paragraph"),
-            ]),
+            video(body=video_body(
+                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
+            video(body=video_body(
+                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
+            video(body=video_body(
+                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
+            video(body=video_body(
+                src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")),
         ]),
     ])
 
+    report.write("public/report.json")
+    report.write("public/report.json")
     report.write("public/report.json")
