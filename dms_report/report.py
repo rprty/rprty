@@ -6,12 +6,22 @@ from pydantic import BaseModel
 
 
 class Section(BaseModel):
-    content: Any
+    body: Any
 
 
 class h1(Section):
     type: str = "h1"
-    content: str
+    body: str
+
+
+class p(Section):
+    type: str = "p"
+    body: str
+
+
+class grid(Section):
+    type: str = "grid"
+    body: list[Section]
 
 
 class Report:
@@ -30,7 +40,20 @@ class Report:
 
 if __name__ == "__main__":
     report = Report([
-        h1(content="Hello, World!")
+        h1(body="Hello, World!"),
+        p(body="This is a paragraph"),
+        grid(body=[
+            h1(body="Hello, World!"),
+            p(body="This is a paragraph"),
+            grid(body=[
+                h1(body="Hello, World!"),
+                p(body="This is a paragraph"),
+            ]),
+            grid(body=[
+                h1(body="Hello, World!"),
+                p(body="This is a paragraph"),
+            ]),
+        ]),
     ])
 
     report.write("public/report.json")
